@@ -4,24 +4,28 @@ const Button = ({ onClick, text }) => {
   return <button onClick={onClick}>{text}</button>;
 };
 
-const StatisticLine = ({ text, value }) => {
-  if (text.toLowerCase().includes("rate")) {
+const StatisticLine = ({ text, value, type }) => {
+  if (type.toLowerCase() === "rate") {
     return (
-      <p>
-        <strong>
-          <em>{text}</em>
-        </strong>
-        : {value}%
-      </p>
+      <tr>
+        <td>
+          <strong>
+            <em>{text}</em>
+          </strong>
+        </td>
+        <td> {value}%</td>
+      </tr>
     );
   } else {
     return (
-      <p>
-        <strong>
-          <em>{text}</em>
-        </strong>
-        : {value}
-      </p>
+      <tr>
+        <td>
+          <strong>
+            <em>{text}</em>
+          </strong>
+        </td>
+        <td> {value}</td>
+      </tr>
     );
   }
 };
@@ -57,13 +61,20 @@ const App = () => {
       ) : (
         <>
           <h2>Statistics</h2>
-          <StatisticLine text="Good" value={good} />
-          <StatisticLine text="Neutral" value={neutral} />
-          <StatisticLine text="Bad" value={bad} />
-          <hr></hr>
-          <StatisticLine text="Total Ratings" value={total} />
-          <StatisticLine text="Ratings Average" value={average} />
-          <StatisticLine text="Positive Feedback Rate" value={positiveRate} />
+          <table>
+            <tbody>
+              <StatisticLine type="num" text="Good" value={good} />
+              <StatisticLine type="num" text="Neutral" value={neutral} />
+              <StatisticLine type="num" text="Bad" value={bad} />
+              <StatisticLine type="num" text="All" value={total} />
+              <StatisticLine type="num" text="Average" value={average} />
+              <StatisticLine
+                type={"rate"}
+                text="Positive"
+                value={positiveRate}
+              />
+            </tbody>
+          </table>
         </>
       )}
     </div>
