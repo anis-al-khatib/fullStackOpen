@@ -4,12 +4,12 @@ const Button = ({ onClick, text }) => {
   return <button onClick={onClick}>{text}</button>;
 };
 
-const Statistics = ({ type, value }) => {
-  if (type.toLowerCase().includes("rate")) {
+const StatisticLine = ({ text, value }) => {
+  if (text.toLowerCase().includes("rate")) {
     return (
       <p>
         <strong>
-          <em>{type}</em>
+          <em>{text}</em>
         </strong>
         : {value}%
       </p>
@@ -18,7 +18,7 @@ const Statistics = ({ type, value }) => {
     return (
       <p>
         <strong>
-          <em>{type}</em>
+          <em>{text}</em>
         </strong>
         : {value}
       </p>
@@ -56,15 +56,14 @@ const App = () => {
         </h2>
       ) : (
         <>
-          <h2>Ratings</h2>
-          <Statistics type={"Good"} value={good} />
-          <Statistics type={"Neutral"} value={neutral} />
-          <Statistics type={"Bad"} value={bad} />
-          <hr></hr>
           <h2>Statistics</h2>
-          <Statistics type={"Total Ratings"} value={total} />
-          <Statistics type={"Ratings Average"} value={average} />
-          <Statistics type={"Positive Feedback Rate"} value={positiveRate} />
+          <StatisticLine text="Good" value={good} />
+          <StatisticLine text="Neutral" value={neutral} />
+          <StatisticLine text="Bad" value={bad} />
+          <hr></hr>
+          <StatisticLine text="Total Ratings" value={total} />
+          <StatisticLine text="Ratings Average" value={average} />
+          <StatisticLine text="Positive Feedback Rate" value={positiveRate} />
         </>
       )}
     </div>
