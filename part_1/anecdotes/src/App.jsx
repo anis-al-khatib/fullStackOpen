@@ -29,14 +29,30 @@ const App = () => {
     votesCopy[selected] += 1;
     setVotes(votesCopy)
   };
+  const highestVoted = anecdotes[getHighest(votes)]
   return (
     <>
+      <h1>Anecdote of the day</h1>
       <p>{ anecdotes[selected] }</p>
       <p>Votes: { votes[selected] }</p>
       <Button onClick={nextAnecdote} text={"Next Anecdote"} />
       <Button onClick={voteAnecdote} text={"Vote"} />
+      <h1>Highest Votes Anecdote</h1>
+      <p>{ highestVoted }</p>
+      <em>with <strong>{ votes[getHighest(votes)] }</strong> votes</em>
     </>
   );
 };
 
+  function getHighest(array) {
+    let base = 0
+    let highest
+    for (let i = 0; i < array.length; i++) {
+      if (array[i] >= base) {
+        base = array[i]
+        highest = i
+      }
+    }
+    return highest
+  }
 export default App;
