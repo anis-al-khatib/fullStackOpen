@@ -22,10 +22,19 @@ const App = () => {
     setSelected(selection);
   };
 
+  const [votes, setVotes] = useState(Array(anecdotes.length).fill(0));
+  const votesCopy = [ ...votes ]
+
+  const voteAnecdote = () => {
+    votesCopy[selected] += 1;
+    setVotes(votesCopy)
+  };
   return (
     <>
-      <p>{anecdotes[selected]}</p>
+      <p>{ anecdotes[selected] }</p>
+      <p>Votes: { votes[selected] }</p>
       <Button onClick={nextAnecdote} text={"Next Anecdote"} />
+      <Button onClick={voteAnecdote} text={"Vote"} />
     </>
   );
 };
